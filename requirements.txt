@@ -6,5 +6,4 @@ scikit-learn
 ipykernel
 pymongo[srv]
 pymongo
-catboost
-xgboost
+certifi

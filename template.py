@@ -8,14 +8,14 @@ project_name = "phishing_detector"
 
 
 list_of_files = [
-    f"src/{project_name}/__init__.py",
-    f"src/{project_name}/components/__init__.py",
-    f"src/{project_name}/pipeline/__init__.py",
-    f"src/{project_name}/logging/__init__.py",
-    f"src/{project_name}/exception/__init__.py",
-    f"src/{project_name}/entity/__init__.py",
-    f"src/{project_name}/utils/__init__.py",
-    f"src/{project_name}/constant/__init__.py",
+    f"phishing/__init__.py",
+    f"phishing/components/__init__.py",
+    f"phishing/pipeline/__init__.py",
+    f"phishing/logging/__init__.py",
+    f"phishing/exception/__init__.py",
+    f"phishing/entity/__init__.py",
+    f"phishing/utils/__init__.py",
+    f"phishing/constant/__init__.py",
     "main.py",
     "setup.py",
 
