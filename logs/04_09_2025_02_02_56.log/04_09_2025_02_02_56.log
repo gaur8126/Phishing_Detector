@@ -1,0 +1,5 @@
+[2025-04-09 02:02:57,073] 32 root - INFO - >>>> Data Transformation Stage started <<<<<
+[2025-04-09 02:02:57,077] 17 root - INFO - yaml file: config\config.yaml loaded successfully
+[2025-04-09 02:02:57,077] 17 root - INFO - yaml file: params.yaml loaded successfully
+[2025-04-09 02:02:57,080] 17 root - INFO - yaml file: schema.yaml loaded successfully
+[2025-04-09 02:02:57,082] 29 root - INFO - create directory as: artifacts

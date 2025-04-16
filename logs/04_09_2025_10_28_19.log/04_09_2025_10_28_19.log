@@ -1,0 +1,6 @@
+[2025-04-09 10:28:53,031] 15 root - INFO - >>>>>>> Stage Data Ingestion Stage started
+[2025-04-09 10:28:53,031] 20 root - ERROR - 'DataIngestionTrainingPipeline' object has no attribute 'initiate_data_ingestion'
+Traceback (most recent call last):
+  File "D:\Projects\Phishing_Detector\main.py", line 17, in <module>
+    data_ingestion.initiate_data_ingestion()
+AttributeError: 'DataIngestionTrainingPipeline' object has no attribute 'initiate_data_ingestion'

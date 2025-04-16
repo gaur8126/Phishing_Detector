@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing URL Detector</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            color: #1a73e8;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="url"] {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #1a73e8;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="url"]:focus {
+            border-color: #1557b0;
+            box-shadow: 0 0 8px rgba(26, 115, 232, 0.2);
+        }
+
+        button {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #1557b0;
+            transform: translateY(-1px);
+        }
+
+        .result-section {
+            display: none;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-section.visible {
+            display: block;
+        }
+
+        .safe {
+            background: #e6f4ea;
+            border: 2px solid #34a853;
+            color: #137333;
+        }
+
+        .phishing {
+            background: #fce8e6;
+            border: 2px solid #ea4335;
+            color: #c5221f;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .result-icon {
+            font-size: 28px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-details {
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .result-details strong {
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 1rem 0;
+            color: #1a73e8;
+            font-weight: 500;
+        }
+
+        .loading.visible {
+            display: block;
+        }
+
+        .loading-dot {
+            animation: dotPulse 1.4s infinite;
+            opacity: 0;
+        }
+
+        @keyframes dotPulse {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Phishing URL Detector</h1>
+        
+        <form id="urlForm" onsubmit="event.preventDefault(); checkURL();">
+            <div class="input-group">
+                <input type="url" id="urlInput" name="url" placeholder="https://example.com" required>
+                <button type="submit">Analyze Now</button>
+            </div>
+        </form>
+
+        <div class="loading" id="loading">
+            <p>Scanning URL for threats<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></p>
+        </div>
+
+        <div class="result-section" id="resultSection">
+            <div class="result-header">
+                <span class="result-icon" id="resultIcon">⚠️</span>
+                <h2 id="resultTitle">Analysis Result</h2>
+            </div>
+            <div class="result-details">
+                <p><strong>Status:</strong> <span id="status">-</span></p>
+                <p><strong>Risk Level:</strong> <span id="riskLevel">-</span></p>
+                <p><strong>Domain Age:</strong> <span id="domainInfo">-</span></p>
+                <p><strong>Detected Threats:</strong> <span id="threats">-</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function checkURL() {
+            const urlInput = document.getElementById('urlInput');
+            const resultSection = document.getElementById('resultSection');
+            const loading = document.getElementById('loading');
+            const resultIcon = document.getElementById('resultIcon');
+
+            // Reset UI
+            resultSection.classList.remove('visible', 'safe', 'phishing');
+            
+            // Show loading
+            loading.classList.add('visible');
+            
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({url: urlInput.value})
+                });
+
+                const data = await response.json();
+
+                // Update UI
+                if (data.is_phishing) {
+                    resultSection.classList.add('phishing', 'visible');
+                    resultIcon.textContent = '❌';
+                    document.getElementById('resultTitle').textContent = 'Phishing Detected!';
+                    document.getElementById('status').textContent = 'Dangerous';
+                } else {
+                    resultSection.classList.add('safe', 'visible');
+                    resultIcon.textContent = '✅';
+                    document.getElementById('resultTitle').textContent = 'Safe Website';
+                    document.getElementById('status').textContent = 'Secure';
+                }
+
+                document.getElementById('riskLevel').textContent = data.risk_level || 'High';
+                document.getElementById('domainInfo').textContent = data.domain_info || 'Unknown';
+                document.getElementById('threats').textContent = data.threats || 'No specific threats detected';
+
+            } catch (error) {
+                console.error('Error:', error);
+                resultSection.classList.add('phishing', 'visible');
+                document.getElementById('resultTitle').textContent = 'Analysis Failed';
+                document.getElementById('status').textContent = 'Error';
+                document.getElementById('riskLevel').textContent = 'Unknown';
+                document.getElementById('domainInfo').textContent = 'Unable to analyze';
+                document.getElementById('threats').textContent = 'Connection error';
+                resultIcon.textContent = '⚠️';
+            } finally {
+                loading.classList.remove('visible');
+            }
+        }
+    </script>
+</body>
+</html>

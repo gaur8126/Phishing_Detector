@@ -1,0 +1,8 @@
+[2025-04-09 01:37:57,556] 17 root - INFO - yaml file: config\config.yaml loaded successfully
+[2025-04-09 01:37:57,559] 17 root - INFO - yaml file: params.yaml loaded successfully
+[2025-04-09 01:37:57,570] 17 root - INFO - yaml file: schema.yaml loaded successfully
+[2025-04-09 01:37:57,571] 29 root - INFO - create directory as: artifacts
+[2025-04-09 01:37:57,571] 29 root - INFO - create directory as: artifacts/data_transformation
+[2025-04-09 01:37:57,750] 18 root - INFO - Splited data training and test sets
+[2025-04-09 01:37:57,769] 19 root - INFO - (8291, 31)
+[2025-04-09 01:37:57,769] 20 root - INFO - (2764, 31)

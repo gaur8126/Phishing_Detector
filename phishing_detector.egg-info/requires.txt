@@ -1,7 +1,7 @@
-pandas 
-numpy 
+pandas
+numpy
 matplotlib
-seaborn 
+seaborn
 scikit-learn
 xgboost
 catboost
@@ -14,8 +14,7 @@ whois
 requests
 bs4
 tldextract
-Pyyaml 
+Pyyaml
 joblib
 ensure
 python-box
-flask

@@ -1,0 +1,7 @@
+[2025-04-09 01:37:21,554] 24 root - INFO - >>>> Stage Date Validation Stage started <<<
+[2025-04-09 01:37:21,579] 17 root - INFO - yaml file: config\config.yaml loaded successfully
+[2025-04-09 01:37:21,579] 17 root - INFO - yaml file: params.yaml loaded successfully
+[2025-04-09 01:37:21,592] 17 root - INFO - yaml file: schema.yaml loaded successfully
+[2025-04-09 01:37:21,594] 29 root - INFO - create directory as: artifacts
+[2025-04-09 01:37:21,594] 29 root - INFO - create directory as: artifacts/data_validation
+[2025-04-09 01:37:21,668] 27 root - INFO - >>>>> Stage Date Validation Stage Completed <<<<
