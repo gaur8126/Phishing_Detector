@@ -61,11 +61,11 @@ class URLFeatureExtractor:
             'Iframe': 1,
             'age_of_domain': -1,
             'DNSRecord': -1,
-            # 'web_traffic': -1,
-            # 'Page_Rank': -1,
-            # 'Google_Index': -1,
-            # 'Links_pointing_to_page': -1,
-            # 'Statistical_report': 1
+            'web_traffic': -1,
+            'Page_Rank': -1,
+            'Google_Index': -1,
+            'Links_pointing_to_page': -1,
+            'Statistical_report': 1
         }
 
         try:
@@ -240,6 +240,7 @@ class URLFeatureExtractor:
                     reg_length = (expiry_date - creation_date).days
                     if reg_length > 365:  # More than 1 year
                         self.features['Domain_registeration_length'] = 1
+            return domain_info
         except:
             pass
 
@@ -428,7 +429,7 @@ class URLFeatureExtractor:
 
 # Example usage
 if __name__ == "__main__":
-    test_url = "http://sub1.sub2.sub3.218.184.94.129:8080//xq5i8/ulztqrnheddl2ypvb5ltw48sv3x4fsvftx3txa6ggx3ocoipcomo4fy7l36v7jy8ew3za1fdu34/%20%3F%236eky2/https-secure?u=http%3A%2F%2Fexternal-site.com&l=mailto%3Aadmin%40k8vv4x.com&a=http%3A%2F%2Fcdn-service.net%2Fform&s=http%3A%2F%2Fthird-party.org%2Fscript.js&r=4&m=onmouseover%3Dalert%281%29&rc=disabled&p=popup%3D1&i=iframe%3D1&f=http%3A%2F%2Fexternal-site.com%2Ffavicon.ico"  # Replace with your URL
+    test_url = "https://github.com"#"http://sub1.sub2.sub3.218.184.94.129:8080//xq5i8/ulztqrnheddl2ypvb5ltw48sv3x4fsvftx3txa6ggx3ocoipcomo4fy7l36v7jy8ew3za1fdu34/%20%3F%236eky2/https-secure?u=http%3A%2F%2Fexternal-site.com&l=mailto%3Aadmin%40k8vv4x.com&a=http%3A%2F%2Fcdn-service.net%2Fform&s=http%3A%2F%2Fthird-party.org%2Fscript.js&r=4&m=onmouseover%3Dalert%281%29&rc=disabled&p=popup%3D1&i=iframe%3D1&f=http%3A%2F%2Fexternal-site.com%2Ffavicon.ico"  # Replace with your URL
     extractor = URLFeatureExtractor(test_url)
     features = extractor.get_features()
 

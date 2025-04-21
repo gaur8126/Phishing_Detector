@@ -19,5 +19,5 @@ joblib
 ensure
 python-box
 flask
-# mlfow
+mlfow
 dagshub

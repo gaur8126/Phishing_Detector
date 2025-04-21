@@ -165,7 +165,7 @@
         
         <form id="urlForm" onsubmit="event.preventDefault(); checkURL();">
             <div class="input-group">
-                <input type="url" id="urlInput" name="url" placeholder="https://example.com" required>
+                <input type="text" id="urlInput" name="url" placeholder="https://example.com" required>
                 <button type="submit">Analyze Now</button>
             </div>
         </form>
@@ -214,20 +214,21 @@
 
                 // Update UI
                 if (data.is_phishing) {
-                    resultSection.classList.add('phishing', 'visible');
-                    resultIcon.textContent = '❌';
-                    document.getElementById('resultTitle').textContent = 'Phishing Detected!';
-                    document.getElementById('status').textContent = 'Dangerous';
-                } else {
                     resultSection.classList.add('safe', 'visible');
                     resultIcon.textContent = '✅';
                     document.getElementById('resultTitle').textContent = 'Safe Website';
                     document.getElementById('status').textContent = 'Secure';
+                    
+                } else {
+                    resultSection.classList.add('phishing', 'visible');
+                    resultIcon.textContent = '❌';
+                    document.getElementById('resultTitle').textContent = 'Phishing Detected!';
+                    document.getElementById('status').textContent = 'Dangerous';
                 }
 
-                document.getElementById('riskLevel').textContent = data.risk_level || 'High';
-                document.getElementById('domainInfo').textContent = data.domain_info || 'Unknown';
-                document.getElementById('threats').textContent = data.threats || 'No specific threats detected';
+                // document.getElementById('riskLevel').textContent = data.risk_level || 'High';
+                // document.getElementById('domainInfo').textContent = data.domain_info || 'Unknown';
+                // document.getElementById('threats').textContent = data.threats || 'No specific threats detected';
 
             } catch (error) {
                 console.error('Error:', error);

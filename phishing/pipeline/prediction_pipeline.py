@@ -10,9 +10,9 @@ class PredictionPipeline:
     def predict(self,data):
         prediction = self.model.predict(data)
 
-        return prediction
+        return prediction[0]
     
-if __name__ == "__main__":
-    obj = PredictionPipeline()
-    predict = obj.predict([[1,0,-1,1,1,-1,1,1,-1,1,1,1,1,0,0,-1,1,1,0,-1,1,-1,1,-1,-1,0,-1,1,1,1]])
-    print(predict)
+# if __name__ == "__main__":
+#     obj = PredictionPipeline()
+#     predict = obj.predict([[1,0,-1,1,1,-1,1,1,-1,1,1,1,1,0,0,-1,1,1,0,-1,1,-1,1,-1,-1,0,-1,1,1,1]])
+#     print(predict)
